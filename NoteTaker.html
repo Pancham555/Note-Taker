@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notepad</title>
+  <!-- <link rel="stylesheet" href="NoteTaker.css"> -->
+  <style>
+    body {
+    margin: 0px;
+    padding: 0px;
+    background-color: rgb(247, 198, 126);
+  }
+
+  nav {
+    background-color: rgb(255, 187, 0);
+    padding: 20px;
+    text-align: center;
+    color: rgb(82, 80, 77);
+    font-size: 2rem;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 10;
+  }
+
+  #note_input {
+    display: flex;
+    justify-content: center;
+    font-size: 1rem;
+    margin: 8rem 1rem 1rem 1rem;
+    z-index: 10;
+  }
+
+  #input {
+    margin: 0rem 1rem;
+    font-size: 1rem;
+    width:120px;
+    height:auto;
+  }
+
+  #add {
+    padding: 15px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 100px;
+  }
+
+  #holder {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+  }
+
+  .note {
+    margin: 20px;
+    background-color: white;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    font-size: 1.6rem;
+    border-radius: 10px;
+    position: relative;
+    display: inline-block;
+
+  }
+
+  .edit_holder {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+  }
+
+  .start_edit {
+    background-color: rgb(33, 102, 230);
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  .cross {
+    cursor: pointer;
+    background-color: rgb(245, 61, 61);
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+  }
+
+  .text {
+    margin: 1rem 0rem;
+  }
+
+  .editing {
+    margin: 20px 5px 5px 5px;
+    display: none;
+  }
+
+  .edit {
+    font-size: 1.5rem;
+  }
+
+  .edit_confirm {
+    box-shadow: 0px 0px 5px black;
+    border-radius: 100px;
+    padding: 5px 10px;
+    margin: 5px;
+  }
+  </style>
+</head>
+
+<body>
+  <nav>
+    Keep your notes here
+  </nav>
+  <div id="note_input">
+    <input type="text" name="" id="input">
+    <div id="add">+</div>
+  </div>
+  <div id="holder">
+
+    <!-- <div class="note">
+
+      <div class="text">Sample note</div>
+
+      <div class="editors">
+
+        <div class="edit_holder">
+          <div class="start_edit">Edit</div>
+          <div class="cross">x</div>
+        </div>
+
+        <div class="editing">
+          <input type="text" class="edit">
+          <div class="edit_confirm">+</div>
+        </div>
+
+      </div>
+
+    </div> -->
+
+  </div>
+  <!-- <script src="NoteTaker.js"></script> -->
+  <script>
+    document.querySelector("#add").addEventListener("click", function () {
+    //Holder of all elements
+    let holder = document.querySelector("#holder")
+    //Button to create a new note
+    let inputFirst = document.querySelector("#input").value
+    //Creating all elements 
+    let note = document.createElement("div")
+    note.classList = "note"
+    let text = document.createElement("div")
+    text.classList = "text"
+    text.innerText = inputFirst
+    let editors = document.createElement("div")
+    editors.classList = "editors"
+    let edit_holder = document.createElement("div")
+    edit_holder.classList = "edit_holder"
+    let start_edit = document.createElement("div")
+    start_edit.classList = "start_edit"
+    start_edit.innerText = "Edit"
+    let cross = document.createElement("div")
+    cross.classList = "cross"
+    cross.innerText = "x"
+    let editing = document.createElement("div")
+    editing.classList = "editing"
+    let edit = document.createElement("input")
+    edit.classList = "edit"
+    let edit_confirm = document.createElement("div")
+    edit_confirm.classList = "edit_confirm"
+    edit_confirm.innerText = "+"
+
+    //All the puttting inside one another section
+    editing.appendChild(edit)
+    editing.appendChild(edit_confirm)
+    edit_holder.appendChild(start_edit)
+    edit_holder.appendChild(cross)
+    editors.appendChild(edit_holder)
+    editors.appendChild(editing)
+    note.appendChild(text)
+    note.appendChild(editors)
+    holder.appendChild(note)
+
+    //Functions under a note
+    start_edit.addEventListener("click", function () {
+        if (editing.style.display != "flex") {
+            editing.style.display = "flex"
+        }
+        else {
+            editing.style.display = "none"
+        }
+    })
+
+    edit_confirm.addEventListener("click", function () {
+        let prevText = edit.value
+        let secondEdit = text.innerText
+        text.innerText = secondEdit + " " + prevText
+    })
+
+    cross.addEventListener("click", function () {
+        note.style.display = "none"
+    })
+})
+  </script>
+</body>
+
+</html>
